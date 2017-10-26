@@ -25,13 +25,13 @@ $(OBJ_DIR_3)/c_poupanca.o: $(INC_DIR_3)/c_poupanca.hpp $(INC_DIR_3)/conta.hpp
 	$(CC) $(CPPFLAGS) -c $(SRC_DIR_3)/c_poupanca.cpp -o $@
 
 $(OBJ_DIR_3)/c_corrente.o: $(INC_DIR_3)/c_corrente.hpp $(INC_DIR_3)/conta.hpp
-	$(CC) $(CPPFLAGS) -c $(SRC_DIR)/c_corrente.cpp -o $@
+	$(CC) $(CPPFLAGS) -c $(SRC_DIR_3)/c_corrente.cpp -o $@
 
 $(OBJ_DIR_3)/agencia.o: $(INC_DIR_3)/agencia.hpp $(INC_DIR_3)/conta.hpp $(INC_DIR_3)/c_poupanca.hpp $(INC_DIR_3)/c_corrente.hpp
 	$(CC) $(CPPFLAGS) -c $(SRC_DIR_3)/agencia.cpp -o $@
 
 $(OBJ_DIR_3)/main.o: $(INC_DIR_3)/conta.hpp $(INC_DIR_3)/agencia.hpp
-	$(CC) $(CPPFLAGS) -c $(SRC_DIR)/main.cpp -o $@
+	$(CC) $(CPPFLAGS) -c $(SRC_DIR_3)/main.cpp -o $@
 dir:
 	mkdir -p bin/ build/
 
