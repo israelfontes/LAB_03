@@ -1,9 +1,9 @@
 
-OBJ_DIR_3 = build
-BIN_DIR_3 = bin
-SRC_DIR_3 = src
-INC_DIR_3 = include
-DOC_DIR_3 = doc
+OBJ_DIR_3 = build/QUESTAO_2_&_3
+BIN_DIR_3 = bin/QUESTAO_2_&_3
+SRC_DIR_3 = src/QUESTAO_2_&_3
+INC_DIR_3 = include/QUESTAO_2_&_3
+DOC_DIR_3 = doc/QUESTAO_2_&_3
 
 CC = g++
 CPPFLAGS = -Wall -pedantic -ansi -std=c++11 -Iinclude/
@@ -32,12 +32,40 @@ $(OBJ_DIR_3)/agencia.o: $(INC_DIR_3)/agencia.hpp $(INC_DIR_3)/conta.hpp $(INC_DI
 
 $(OBJ_DIR_3)/main.o: $(INC_DIR_3)/conta.hpp $(INC_DIR_3)/agencia.hpp
 	$(CC) $(CPPFLAGS) -c $(SRC_DIR)/main.cpp -o $@
+
+
+OBJ_DIR = build/QUESTAO_1
+BIN_DIR = bin/QUESTAO_1
+SRC_DIR = src/QUESTAO_1
+INC_DIR = include/QUESTAO_1
+DOC_DIR = doc/QUESTAO_1
+
+OBJS = $(OBJ_DIR)/produto.o $(OBJ_DIR)/fruta.o $(OBJ_DIR)/roupa.o $(OBJ_DIR)/bebida.o $(OBJ_DIR)/main.o
+
+loja: dir clean $(OBJS)
+	$(CC) -o $(BIN_DIR)/loja $(OBJS)
+
+$(OBJ_DIR)/produto.o: $(INC_DIR)/produto.h
+	$(CC) $(CPPFLAGS) -c $(SRC_DIR)/produto.cpp -o $@
+
+$(OBJ_DIR)/fruta.o: $(INC_DIR)/fruta.h
+	$(CC) $(CPPFLAGS) -c $(SRC_DIR)/fruta.cpp -o $@
+
+$(OBJ_DIR)/roupa.o: $(INC_DIR)/roupa.h
+	$(CC) $(CPPFLAGS) -c $(SRC_DIR)/roupa.cpp -o $@
+
+$(OBJ_DIR)/bebida.o: $(INC_DIR)/bebida.h
+	$(CC) $(CPPFLAGS) -c $(SRC_DIR)/bebida.cpp -o $@
+
+$(OBJ_DIR)/main.o: $(INC_DIR)/produto.h $(INC_DIR)/fruta.h $(INC_DIR)/roupa.h $(INC_DIR)/bebida.h
+	$(CC) $(CPPFLAGS) -c $(SRC_DIR)/main.cpp -o $@
+
 dir:
-	mkdir -p bin/ build/
+	mkdir -p $(BIN_DIR) $(OBJ_DIR)
 
 clean:
-	$(RM) $(OBJ_DIR_3)/*
-	$(RM) $(BIN_DIR)_3/*
+	$(RM) $(OBJ_DIR)/*
+	$(RM) $(BIN_DIR)/*
 
 doxy:
 	mkdir -p doc/

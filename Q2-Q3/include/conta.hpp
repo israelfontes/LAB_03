@@ -110,11 +110,25 @@ class Conta{
 		*/
 		bool operator== (Conta &conta);
 
+		/**
+		* Metodo virtual para que as classes derivadas implementem e possam responder ao operador de extração.
+		* @param i Objeto istream a ser utilizado na extração das informações.
+		* @return istream com os dados lidos.
+		*/
 		virtual std::istream& read(std::istream&)=0;
-		
+	
+		/**
+		* Metodo virtual para que as classes derivadas implementem e possam responder ao operador de inserção.
+		* @param o Obejto ostream a ser preenchido.
+		* @return O objeto ostream com as informações.
+		*/		
 		virtual std::ostream& print(std::ostream&) const = 0 ;
 
-		virtual double getLimite()=0;
+		/// Gambiarra
+		virtual double getLimiteDisp()=0;
+
+		/// Gambiarra
+ 		virtual void setLimiteDisp(double const _limite_disp)=0;
 
 };
 #endif

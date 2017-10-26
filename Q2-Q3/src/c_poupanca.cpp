@@ -16,8 +16,12 @@ ContaPoupanca::ContaPoupanca(std::string _numero, std::string _agencia, std::str
 
 ContaPoupanca::~ContaPoupanca(){}
 
-double ContaPoupanca::getTaxa(){ return p_taxa_juros; }				
-double ContaPoupanca::getLimite(){return 0;}
+double ContaPoupanca::getTaxa(){ return p_taxa_juros; }		
+
+double ContaPoupanca::getLimiteDisp(){return 0;}
+
+void ContaPoupanca::setLimiteDisp(double const _limite_disp){  }
+
 void ContaPoupanca::setTaxa(double const _taxa_juros){ p_taxa_juros = _taxa_juros; }
 
 std::ostream& ContaPoupanca::print(std::ostream &o) const{

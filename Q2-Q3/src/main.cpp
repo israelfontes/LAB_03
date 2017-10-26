@@ -1,184 +1,55 @@
 #include <iostream>
-#include <string>
 #include <memory>
-#include "c_poupanca.hpp"
-#include "c_corrente.hpp"
+
+#include "agencia.hpp"
 #include "conta.hpp"
-#include "movimentacao.hpp"
+
 
 using namespace std;
 
 vector<shared_ptr<Conta>> contas;
 
-bool criarConta(void){
-	ContaCorrente cc_conta;
-	ContaPoupanca cp_conta;
-
-	int opcao;
-
-	cout << "=================CRIANDO CONTA===============" << endl;
-	cout << "Qual tipo da conta? (1) Corrente (2) Poupança" << endl;
-	cin >> opcao;
-
-	if(opcao == 1){
-		
-			
-		cin >> cc_conta;
-		for (auto i = contas.begin(); i != contas.end(); ++i)
-		{
-			if(**i == cc_conta){
-				cout << "===============CONTA NÃO CRIADA==============" << endl;
-				cout << "(Erro !) Essa conta já foi cadastrada!" << endl;
-				cout << "=============================================" << endl;
-				return criarConta();	
-			}
-		}
-		contas.push_back(make_shared<ContaCorrente>(cc_conta));
-		cout << "=================CONTA CRIADA================" << endl;
-		return true;
-	
-	}else if(opcao == 2){
-		
-		cin >> cp_conta;
-		for (auto i = contas.begin(); i != contas.end(); ++i)
-		{
-			if(**i == cp_conta){
-				cout << "===============CONTA NÃO CRIADA==============" << endl;
-				cout << "(Erro !) Essa conta já foi cadastrada!" << endl;
-				cout << "=============================================" << endl;
-				return criarConta();	
-			}
-		}
-		contas.push_back(make_shared<ContaPoupanca>(cp_conta));
-		cout << "=================CONTA CRIADA================" << endl;
-		return true;
-
-	}
-	cout << "Opção inválida." << endl;
-	return criarConta();
-	
-}
-
-shared_ptr<Conta> procurarConta(std::string * _numero, std::string * _agencia){
-	for (auto i = contas.begin(); i != contas.end(); ++i){
-		if(not _numero->compare((**i).getNumero()) and not _agencia->compare((**i).getAgencia()))
-			return *i;
-	}
-	return nullptr;
-}
-
-bool realizarDeposito(){
-	std::string n_string, a_string;
-	shared_ptr<Conta> conta;
-
-	cout << "==================DÉPOSITO===================" << endl;
-	cout << "Digite o número da conta: ";
-	cin >> n_string;
-
-	cout << "Digite a agência: ";
-	cin >> a_string;
-
-	conta = procurarConta(&n_string, &a_string);
-	if(conta != nullptr){
-		double valor;
-		
-		cout << "Digite o valor para déposito: R$";
-		cin >> valor;
-
-		conta->setSaldo(conta->getSaldo()+valor);
-		conta->addMovimentacao("Déposito", "Crédito", valor);
-
-		cout << "=============DÉPOSITO REALIZADO==============" << endl;
-		return true;
-	}else{
-		cout << "===========DÉPOSITO NÃO REALIZADO============" << endl;
-		cout << "(Erro !) A conta não exitse." << endl;
-		return false;
-	}
-}
-
-bool realizarTransferencia(){
-
-	std::string n_string, a_string; 
-	shared_ptr<Conta> conta_r, conta_d;
-
-	cout << "================TRANSFERÊNCIA================" << endl;
-	
-	cout << "Digite o número da conta: ";
-	cin >> n_string;
-
-	cout << "Digite a agência: ";
-	cin >> a_string;
-
-	conta_r = procurarConta(&n_string, &a_string);
-
-	if(conta_r != nullptr){
-		
-		cout << "Digite o valor da transferência: R$";
-		double valor;
-		cin >> valor;
-
-		if(valor <= conta_r->getSaldo()+conta_r->getLimite()){
-			
-			cout << "Digite o número da conta destino: ";
-			cin >> n_string;
-
-			cout << "Digite a agência: ";
-			cin >> a_string;
-			
-			conta_d = procurarConta(&n_string, &a_string);
-
-			if(conta_d != nullptr){
-
-				conta_r->setSaldo(conta_r->getSaldo()-valor);
-				conta_d->setSaldo(conta_d->getSaldo()+valor);
-				conta_r->addMovimentacao("Transferência", "Débito", valor);
-				conta_d->addMovimentacao("Transferência", "Crédito", valor);
-				cout << "============TRANSFERÊNCIA REALIZADA==========" << endl;
-				return true;
-
-			}else{
-				cout << "==========TRANSFERÊNCIA NÃO REALIZADA========" << endl;
-				cout << "(Erro !) A conta destino não existe." << endl;
-				cout << "=============================================" << endl;
-				return false;
-			}
-		}else{
-			cout << "==========TRANSFERÊNCIA NÃO REALIZADA========" << endl;
-			cout << "(Erro !) A conta não possui saldo suficiente." << endl;
-			cout << "=============================================" << endl;
-			return false;
-		}
-
-	}else{
-		cout << "==========TRANSFERÊNCIA NÃO REALIZADA========" << endl;
-		cout << "(Erro !) A conta remetente não exitse." << endl;
-		cout << "=============================================" << endl;				
-		return false;
-	}
-}
-
-bool excluirConta(std::string numero){
-	for(auto i = contas.begin(); i != contas.end(); ++i){
-		if(!(*i)->getNumero().compare(numero)){
-			contas.erase(i);
-			return true;
-		}
-	}
-	return false;
-}
 
 int main(int argc, char const *argv[]){
+	int opcao;
 
-	criarConta();
-	criarConta();
+	while(1){
+		cout << "+++++++++++++++ MENU ++++++++++++++++" << endl;
+		cout << "(1) Cadastrar conta" << endl;
+		cout << "(2) Realizar saque" << endl;
+		cout << "(3) Realizar transferência" << endl;
+		cout << "(4) Extrato de conta" << endl;
+		cout << "(6) Excluir conta" << endl;
+		cout << "(0) Sair" << endl;
 
-	for(vector<shared_ptr<Conta>>::iterator i = contas.begin(); i < contas.end(); ++i)
-		cout << **i;
+		cin >> opcao;
 
-	cout << realizarTransferencia() << endl;
+		switch(opcao){
+			case 1:
+				criarConta(&contas);
+				break;
+			case 2:
+				realizarSaque(&contas);
+				break;
+			case 3:
+				realizarTransferencia(&contas);
+				break;
+			case 4:
+				extratoConta(&contas);
+				break;
+			case 5:
+				realizarDeposito(&contas);
+				break;
+			case 6:
+				excluirConta(&contas);
+				break;
+			case 0:
+				return 0;
+				break;
+			default:
+				cout << "Opção inválida." << endl;
+		};
+	}
 
-	for(vector<shared_ptr<Conta>>::iterator i = contas.begin(); i < contas.end(); ++i)
-		cout << **i;
 	return 0;
 }

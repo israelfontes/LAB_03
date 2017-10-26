@@ -1,6 +1,7 @@
 #ifndef _MOVIMENTACAO_H
 #define _MOVIMENTACAO_H
 #include <string>
+#include <iostream>
 
 /**
 * @file     movimentacao.h
@@ -57,6 +58,13 @@ class Movimentacao{
 		* Altera o valor da movimentação. 
 		* @param _valor Novo valor da movimentação.
 		*/
-		void setValor(double const _valor); 
+		void setValor(double const _valor);
+
+		/**
+		* Sobrecarga do operador de inserção.
+		* @param o Objeto ostream.
+		* @param _movimentacao Obejto Movimentacao a ser inserido.
+		*/
+		friend std::ostream& operator<< (std::ostream &o, Movimentacao &_movimentacao);  
 };
 #endif

@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream>
 #include "movimentacao.hpp"
 
 /**
@@ -27,4 +28,12 @@ void Movimentacao::setDescricao(std::string const _descricao){ m_descricao = _de
 void Movimentacao::setTipo(std::string const _tipo){ m_tipo = _tipo; }
 
 void Movimentacao::setValor(double const _valor){ m_valor = _valor; } 
+
+std::ostream& operator<< (std::ostream &o, Movimentacao &_movimentacao){
+	o << "Descrição: " << _movimentacao.getDescricao() << std::endl;
+	o << "Tipo: " << _movimentacao.getTipo() << std::endl;
+	o << "Valor: R$" << _movimentacao.getValor() << std::endl;
+
+	return o;
+}
 

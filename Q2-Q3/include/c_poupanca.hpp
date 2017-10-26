@@ -42,10 +42,24 @@ class ContaPoupanca : public Conta
 		*/
 		void setTaxa(double const _taxa_juros);
 
+		/**
+		* Preenche um obejto ostream com os dados da classe ContaPoupanca.
+		* @param o Obejto ostream a ser preenchido.
+		* @return O objeto ostream com as informações.
+		*/
 		std::ostream& print(std::ostream &o) const;
 
-		double getLimite();
+		/// Metodo fachada, ele não serve pra nada nessa classe.
+		double getLimiteDisp();
+
+		/// Metodo fachada, ele não serve para nada nessa classe.
+		void setLimiteDisp(double const _limite_disp);
 		
+		/**
+		* Lê as informações da classe ContaPoupanca.
+		* @param i Objeto istream a ser utilizado na extração das informações.
+		* @return istream com os dados lidos.
+		*/
 		std::istream& read(std::istream &i);
 };
 #endif
