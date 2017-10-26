@@ -1,0 +1,11 @@
+PROJECT_NAME = LAB_03
+
+PROJECT_BRIEF = "Este é o terceiro projeto laboratório da disciplina de Linguagem de Programação."
+
+OUTPUT_DIRECTORY =./doc
+
+OUTPUT_LANGUAGEM = Brazilian
+
+EXTRACT_ALL = YES
+
+RECURSIVE = YES
