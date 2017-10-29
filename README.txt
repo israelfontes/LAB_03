@@ -7,6 +7,8 @@ Não foi implementado uma boa interface com o usuário, mas ele pode adicionar o
   -PARA COMPILAR 
     Use o make no diretório Q1
      $ make
+  -PARA EXECUTAR
+     $ ./bin/loja
   -GERAR DOCUMENTAÇÂO
     Também no diretório Q1 use o:
      $ make doc
@@ -17,6 +19,8 @@ Os programas 02 e 03 foram feitos juntos pois na verdade eles são um só. Ele �
     -PARA COMPILAR 
     Use o make no diretório Q2-Q3
      $ make
+  -PARA EXECUTAR
+     $ ./bin/agencia
   -GERAR DOCUMENTAÇÂO
     Também no diretório Q2-Q3 use o:
      $ make doc
